@@ -2,15 +2,22 @@ import urllib.request
 urllib.request.urlretrieve('https://s3.amazonaws.com/tcmg476/http_access_log','serverlogs.txt')
 
 file = open("serverlogs.txt", "r")
-last_year = 0
 total_requests = 0
 
 request = "GET"
-new_year = "remote - - [01/Jan/1995:00:31:54 -0700]"
 January = "/Jan/"
+February = "/Feb/"
+March = "/Mar/"
+April = "/Apr/"
+May = "/May/"
+June = "/Jun/"
+July = "/Jul/"
+August = "/Aug/"
+September = "/Sep/"
+October = "/Oct/"
+November = "/Nov/"
+December = "/Dec/"
 
-
-i=0
 for aline in file:
     line = aline.strip()
     words = line.split()
