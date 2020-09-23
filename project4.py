@@ -18,11 +18,15 @@ October = "/Oct/"
 November = "/Nov/"
 December = "/Dec/"
 
+total_files = []
+requests = []
+status_400 = 0
+status_300 = 0
+
 for aline in file:
-    line = aline.strip()
-    words = line.split()
-    #print(line)
-    #print(words[3])
+    line = aline.split()
+    #words = line.split()
+
 
     if request in line:
         total_requests += 1
@@ -87,4 +91,21 @@ for aline in file:
         dec.write(line)
         dec.write("\n")
         
-file.close()        
+    x = len(line)
+    if x == 10:
+        value = line[x-2]
+        value = int(value)
+        request_file = line[6]
+        if value >= 400 and value <= 499:
+            status_400 +=1
+        if value >= 300 and value <= 399:
+            status_300 +=1
+            
+file.close()
+
+day_average = total_requests/365
+week_average = total_requests/52
+month_average = total_requests/12
+
+percentage_notsuccessful = (status_400/total_requests)*100
+percentage_successful = (status_300/total_requests)*100
