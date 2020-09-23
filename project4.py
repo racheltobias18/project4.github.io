@@ -25,11 +25,11 @@ status_400 = 0
 status_300 = 0
 
 for aline in file:
+    words = aline.strip()
     line = aline.split()
-    #words = line.split()
 
 
-    if request in line:
+    if request in words:
         total_requests += 1
 
     jan = open("jan.txt", "a+")
