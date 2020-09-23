@@ -1,5 +1,6 @@
 import urllib.request
 urllib.request.urlretrieve('https://s3.amazonaws.com/tcmg476/http_access_log','serverlogs.txt')
+from collections import Counter
 
 file = open("serverlogs.txt", "r")
 total_requests = 0
@@ -100,6 +101,13 @@ for aline in file:
             status_400 +=1
         if value >= 300 and value <= 399:
             status_300 +=1
+        total_files.append(request_file)
+
+mostcommon = Counter(total_files)
+mostcommon = mostcommon.most_common(1)[0][0]
+
+leastcommon = Counter(total_files)
+leastcommon = min(leastcommon, key = leastcommon.get)
             
 file.close()
 
@@ -109,3 +117,11 @@ month_average = total_requests/12
 
 percentage_notsuccessful = (status_400/total_requests)*100
 percentage_successful = (status_300/total_requests)*100
+
+print("The average amount of requests made each day is", day_average)
+print("The average amount of requests made each week is", week_average)
+print("The average amount of requests made each month is", month_average)
+print(percentage_notsuccessful, "percent of the requests were not successful.")
+print(percentage_successful, "percent of the requests were successful.")
+print("The most requested file is", mostcommon)
+print("The least requested file is", leastcommon)
